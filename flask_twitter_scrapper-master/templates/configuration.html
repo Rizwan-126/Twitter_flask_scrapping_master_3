@@ -1,0 +1,100 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+<div>
+  <div class="container mx-auto">
+    <div class="row d-flex align-items-center justify-content-center">
+      <div class="col-md-8">
+        <div class="login-body">
+          <h1 class="text-center">Edit Target Configuration</h1>
+          <br />
+       
+
+          {% with messages = get_flashed_messages() %} {% if messages %}
+          <div class="alert alert-primary" role="alert">
+            {% for message in messages %}
+            <div>{{ message }}</div>
+            {% endfor %}
+            </div>  
+          {% endif %} {% endwith %}
+
+          <form id="twitter-target-form" method="POST" action="{{url_for('edit_target_configuration',target_id=target['_id'])}}">
+           
+
+            <div class="form-group">
+
+
+              <label for="like_count">Likes Count </label>
+              <input
+                type="number"
+                value="{{target['configuration']['like_count']}}"
+                class="form-control form-control-sm"
+                id="like_count"
+                name="like_count"
+                required
+                min="0"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="retweet_count">Retweet Count</label>
+              <input
+                type="number"
+                value="{{target['configuration']['retweet_count']}}"
+                class="form-control form-control-sm"
+                id="retweet_count"
+                name="retweet_count"
+                required
+                min="0"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="view_count">View Count</label>
+              <input
+                type="number"
+                value="{{target['configuration']['view_count']}}"
+                class="form-control form-control-sm"
+                id="view_count"
+                name="view_count"
+                required
+                min="0"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="in_keywords">In Keywords</label>
+              <input
+                type="text"
+                value="{{ target['configuration']['in_keywords']|join(',')}}"
+                class="form-control form-control-sm"
+                id="in_keywords"
+                name="in_keywords"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="out_keywords">Out Keywords</label>
+              <input
+                type="text"
+                value="{{ target['configuration']['out_keywords']|join(',')}}"
+                class="form-control form-control-sm"
+                id="out_keywords"
+                name="out_keywords"
+                required
+              />
+            </div>
+
+           <div class="text-center">
+            <button type="submit" class="btn btn-success">Update</button>
+           </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+</div>
+{% endblock %}
